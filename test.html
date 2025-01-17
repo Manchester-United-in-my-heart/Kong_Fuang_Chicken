@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Overflow Example</title>
+    <style>
+        #display_box {
+            display: none;
+            background-color: #f1f1f1;
+            border: 1px solid #d3d3d3;
+            z-index: 1;
+        }
+
+        #hover_button:hover #display_box {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="hover_button">Hover Me</div>
+    </div>
+    <div id="display_box">
+        Hello
+    </div>
+
+    <script>
+        var hover_button = document.getElementById("hover_button");
+        var display_box = document.getElementById("display_box");
+
+        hover_button.addEventListener("mouseover", function () {
+            display_box.style.display = "block";
+        });
+
+        hover_button.addEventListener("mouseout", function () {
+            display_box.style.display = "none";
+        });
+    </script>
+</body>
+
+</html>

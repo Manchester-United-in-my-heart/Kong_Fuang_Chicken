@@ -1,0 +1,2624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiến trúc Huy Việt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.cdnfonts.com/css/utm-avo" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'UTM Avo', sans-serif;
+            font-weight: 400;
+            color: rgba(0, 0, 0, .87);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        body {
+            background-color: #f8f8f8;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0px 0px 10px 0px #0000001a;
+        }
+
+        .left-container .title h1 {
+            font-size: 1em;
+            margin: 19px 0 0;
+            font-weight: 600;
+            float: none;
+            clear: both;
+            line-height: initial;
+        }
+
+        .logo_and_bars {
+            display: none;
+        }
+
+
+
+        @media only screen and (max-width: 600px) {
+            header {
+                background-color: #fff;
+                box-shadow: 0px 0px 10px 0px #0000001a;
+            }
+
+            .logo_and_bars {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo_for_mobile {
+                display: none;
+            }
+
+            #sub_menu_large {
+                display: none;
+            }
+
+            #menu_large {
+                display: none;
+            }
+
+            .header_contact_large {
+                display: none;
+            }
+
+            .bars {
+                display: none;
+            }
+
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            .logo_and_bars {
+                width: 100%;
+                z-index: 1000;
+                justify-content: space-between;
+                padding: 10px 20px;
+            }
+
+            .logo_for_mobile {
+                display: block;
+            }
+
+            .logo_for_mobile img {
+                width: 100px;
+            }
+
+            #change_logo_box {
+                display: none;
+            }
+
+            #right_header_large {
+                display: none;
+            }
+
+
+
+            .bars {
+                display: block;
+                color: #f7982c;
+            }
+
+            .bars i {
+                color: #f7982c;
+                font-size: 28px;
+            }
+
+            .header_contact {
+                position: relative;
+                max-height: 100%;
+                display: none;
+                background-color: #fff;
+                justify-content: space-around;
+                border-top: 1px solid #ddd;
+            }
+
+            .header_contact a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            .header_contact__email,
+            .header_contact__phone {
+                display: flex;
+                align-items: center;
+                font-weight: lighter;
+                font-size: 13px;
+            }
+
+            .bars {
+                font-size: 28px;
+            }
+
+            #container {
+                margin-top: 100px;
+                padding: 0 0.75rem
+            }
+
+            footer {
+                padding: 0 0.75rem;
+                text-align: center;
+            }
+
+            .content h5 {
+                font-size: 1.4em;
+                line-height: 110%;
+                margin: 0.82rem 0 0.656rem;
+                font-weight: 400;
+            }
+
+            .content h6 {
+                font-size: 1.2em;
+                line-height: 110%;
+                margin: 0.5rem 0 0.4rem;
+                font-weight: 400;
+            }
+
+            .content a {
+                text-decoration: none;
+                color: #0000FF;
+            }
+
+            .content img {
+                width: 100%;
+            }
+
+            .right_container .title {
+                text-transform: uppercase;
+                border-top: 1px solid #ddd;
+                font-size: 1em;
+            }
+
+            .right_container .title a {
+                font-weight: 500;
+                color: #666;
+            }
+
+            .right_container ul {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .right_container li {
+                display: flex;
+                width: 100%;
+                background: #f1f1f1;
+                padding: 5px 1em 10px;
+                align-items: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .right_container .number {
+                display: inline-block;
+                font-size: 2.5em;
+                line-height: 50px;
+                font-family: "UTMAvo", sans-serif;
+                color: #a2a2a2;
+                margin-top: 0;
+                margin-right: 5px;
+            }
+
+            .right_container li a {
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .right_container li h3 {
+                font-size: 1em;
+                font-weight: 400;
+                margin: 0;
+            }
+
+            .right_container li p {
+                font-size: 12px;
+                color: #717171;
+                margin: 0 0 3px;
+            }
+
+            .right_container li p,
+            .right_container li h3 {
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .image img {
+                width: 100%;
+            }
+
+            .parent {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .sub-section {
+                display: flex;
+                flex-direction: column;
+                padding-left: 20px;
+            }
+
+            .sub-section {
+                display: none;
+            }
+
+            .sub-section a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            #side_menu {
+                display: none;
+                position: fixed;
+                right: 0;
+                width: 50%;
+                min-height: 100%;
+                background-color: #fff;
+                z-index: 100;
+                padding: 20px;
+                flex-direction: column;
+            }
+
+            .active {
+                display: flex !important;
+            }
+
+            .sub-section_button {
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .rotate {
+                transform: rotate(90deg);
+            }
+
+            #share_icons {
+                display: flex;
+                justify-content: space-around;
+                margin: 10px 0px;
+            }
+
+            .side_contact__email,
+            .side_contact__phone {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                padding: 5px 10px;
+                border: #dddddd 1px solid;
+                text-align: center;
+                align-items: center;
+                font-weight: lighter;
+                font-size: 13px;
+            }
+
+            #black_overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 99;
+            }
+
+            #side_menu_button {
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            #contact_area {
+                position: fixed;
+                z-index: 100;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            #contact_popup {
+                display: none;
+                position: fixed;
+                bottom: 70px;
+                right: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                z-index: 100;
+            }
+
+            #contact_popup .contact_method {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                gap: 10px;
+                margin: 10px 0;
+            }
+
+            #contact_popup .contact_method a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            #contact_popup .contact_method i {
+                padding: 10px;
+                background-color: #f7982c;
+                border-radius: 100%;
+            }
+
+            #contact_popup .contact_method p {
+                margin: 0;
+                text-align: left;
+            }
+
+            .contact_popup__header {
+                color: white;
+                background-color: #f7982c;
+                padding: 20px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            #contact_popup::after {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                /* Adjust this value to position the tail */
+                right: 20px;
+                /* Adjust this value to position the tail */
+                border-width: 10px;
+                border-style: solid;
+                border-color: transparent #fff transparent transparent;
+                /* Adjust the colors to match your popup */
+            }
+
+            #contact_now {
+                display: flex;
+                position: relative;
+                width: 40px;
+                height: 40px;
+            }
+
+            #contact_now_button {
+                position: relative;
+                background-color: #fff;
+                color: #fff;
+                border: none;
+                aspect-ratio: 1/1;
+                border-radius: 100%;
+                border: solid 5px #f7982c;
+                cursor: pointer;
+                transition: transform 0.5s ease-in-out;
+                margin: 0px;
+                z-index: 100;
+            }
+
+            #contact_now_button i {
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            #green_point {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: #00ff00;
+                border-radius: 100%;
+                width: 10px;
+                height: 10px;
+            }
+
+            .active_block {
+                display: block !important;
+            }
+
+            #email_button {
+                background-color: #fff;
+                border: none;
+                color: #fff;
+            }
+
+            #email_modal {
+                display: none;
+                position: fixed;
+                bottom: 70px;
+                right: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                z-index: 100;
+            }
+
+            #email_modal_close {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background-color: #f7982c;
+                color: #fff;
+                border-radius: 100%;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                line-height: 20px;
+                cursor: pointer;
+                padding: 0;
+                margin: 0;
+            }
+
+            #email_modal_content {
+                padding: 20px;
+            }
+
+            #contact_form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .field {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 1199px) {
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            .logo_and_bars {
+                width: 100%;
+                z-index: 1000;
+                justify-content: space-between;
+                padding: 10px 20px;
+            }
+
+            .logo_for_mobile {
+                display: none;
+            }
+
+            .bars {
+                display: block;
+                color: #f7982c;
+            }
+
+            .bars i {
+                color: #f7982c;
+                font-size: 28px;
+            }
+
+            .header_contact {
+                position: relative;
+                max-height: 100%;
+                display: flex;
+                background-color: #fff;
+                justify-content: space-around;
+                border-top: 1px solid #ddd;
+            }
+
+            .header_contact a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            .header_contact div {
+                display: flex;
+                gap: 10px;
+            }
+
+            .header_contact__email,
+            .header_contact__phone {
+                display: flex;
+                align-items: center;
+                font-weight: lighter;
+                font-size: 13px;
+            }
+
+            .bars {
+                font-size: 28px;
+            }
+
+            #container {
+                margin-top: 100px;
+                padding: 0 100px
+            }
+
+            footer {
+                padding: 0 0.75rem;
+                text-align: center;
+            }
+
+            .content h5 {
+                font-size: 1.4em;
+                line-height: 110%;
+                margin: 0.82rem 0 0.656rem;
+                font-weight: 400;
+            }
+
+            .content h6 {
+                font-size: 1.2em;
+                line-height: 110%;
+                margin: 0.5rem 0 0.4rem;
+                font-weight: 400;
+            }
+
+            .content a {
+                text-decoration: none;
+                color: #0000FF;
+            }
+
+            .content img {
+                width: 100%;
+            }
+
+            .right-container .title {
+                text-transform: uppercase;
+                border-top: 1px solid #ddd;
+                font-size: 1em;
+            }
+
+            .right-container .title a {
+                font-weight: 500;
+                color: #666;
+            }
+
+            .right-container ul {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .right-container li {
+                display: flex;
+                width: 100%;
+                background: #f1f1f1;
+                padding: 5px 1em 10px;
+                align-items: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .right-container .number {
+                display: inline-block;
+                font-size: 2.5em;
+                line-height: 50px;
+                font-family: "UTMAvo", sans-serif;
+                color: #a2a2a2;
+                margin-top: 0;
+                margin-right: 5px;
+            }
+
+            .right-container li a {
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .right-container li h3 {
+                font-size: 1em;
+                font-weight: 400;
+                margin: 0;
+            }
+
+            .right-container li p {
+                font-size: 12px;
+                color: #717171;
+                margin: 0 0 3px;
+            }
+
+            .right-container li p,
+            .right-container li h3 {
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .image img {
+                width: 100%;
+            }
+
+            .parent {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .sub-section {
+                display: flex;
+                flex-direction: column;
+                padding-left: 20px;
+            }
+
+            .sub-section {
+                display: none;
+            }
+
+            .sub-section a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            #side_menu {
+                display: none;
+                position: fixed;
+                right: 0;
+                width: 50%;
+                min-height: 100%;
+                background-color: #fff;
+                z-index: 100;
+                padding: 20px;
+                flex-direction: column;
+            }
+
+            .sub-section_button {
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .rotate {
+                transform: rotate(90deg);
+            }
+
+            #share_icons {
+                display: flex;
+                justify-content: space-around;
+                margin: 10px 0px;
+            }
+
+            .side_contact__email,
+            .side_contact__phone {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                padding: 5px 10px;
+                border: #dddddd 1px solid;
+                text-align: center;
+                align-items: center;
+                font-weight: lighter;
+                font-size: 13px;
+            }
+
+            #black_overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 99;
+            }
+
+            #side_menu_button {
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            #contact_area {
+                position: fixed;
+                z-index: 100;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            #contact_popup {
+                display: none;
+                position: fixed;
+                bottom: 70px;
+                right: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                z-index: 100;
+            }
+
+            #contact_popup .contact_method {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                gap: 10px;
+                margin: 10px 0;
+            }
+
+            #contact_popup .contact_method a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            #contact_popup .contact_method i {
+                padding: 10px;
+                background-color: #f7982c;
+                border-radius: 100%;
+            }
+
+            #contact_popup .contact_method p {
+                margin: 0;
+                text-align: left;
+            }
+
+            .contact_popup__header {
+                color: white;
+                background-color: #f7982c;
+                padding: 20px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            #contact_popup::after {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                /* Adjust this value to position the tail */
+                right: 20px;
+                /* Adjust this value to position the tail */
+                border-width: 10px;
+                border-style: solid;
+                border-color: transparent #fff transparent transparent;
+                /* Adjust the colors to match your popup */
+            }
+
+            #contact_now {
+                display: flex;
+                position: relative;
+                width: 40px;
+                height: 40px;
+            }
+
+            #contact_now_button {
+                position: relative;
+                background-color: #fff;
+                color: #fff;
+                border: none;
+                aspect-ratio: 1/1;
+                border-radius: 100%;
+                border: solid 5px #f7982c;
+                cursor: pointer;
+                transition: transform 0.5s ease-in-out;
+                margin: 0px;
+                z-index: 100;
+            }
+
+            #contact_now_button i {
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            #green_point {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: #00ff00;
+                border-radius: 100%;
+                width: 10px;
+                height: 10px;
+            }
+
+            .active_block {
+                display: block !important;
+            }
+
+            #email_button {
+                background-color: #fff;
+                border: none;
+                color: #fff;
+            }
+
+            #email_modal {
+                display: none;
+                position: fixed;
+                bottom: 70px;
+                right: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                z-index: 100;
+            }
+
+            #email_modal_close {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background-color: #f7982c;
+                color: #fff;
+                border-radius: 100%;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                line-height: 20px;
+                cursor: pointer;
+                padding: 0;
+                margin: 0;
+            }
+
+            #email_modal_content {
+                padding: 20px;
+            }
+
+            #contact_form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .field {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+            }
+
+            .logo_for_large {
+                display: grid;
+                grid-template-columns: 1fr 4fr;
+                padding: 10px 20px;
+                gap: 10px;
+                background-color: #fff;
+                box-shadow: 0px 0px 10px 0px #0000001a;
+            }
+
+            #change_logo_box {
+                display: flex;
+                flex-direction: column;
+                justify-content: left;
+                gap: 10px;
+                width: 250px;
+                overflow: hidden;
+                position: relative;
+                transition: height 0.3s ease-in-out;
+            }
+
+            #scroll_up_logo,
+            #scroll_down_logo {
+                position: absolute;
+                transition: transform 0.3s ease-in-out;
+            }
+
+            #scroll_down_logo {
+                height: auto;
+                transform: translateY(300%);
+            }
+
+            .site_title {
+                margin: 0;
+                text-transform: uppercase;
+                transform: translateY(0px);
+                transition: transform 0.5s ease-in-out;
+            }
+
+            .site_title p {
+                margin: 0;
+                padding: 0;
+            }
+
+            .text-orange {
+                color: #f7982c;
+                font-weight: 600;
+                text-transform: none;
+                font-size: 20px;
+            }
+
+            #socials {
+                display: flex;
+                gap: 50px;
+                justify-content: space-between;
+            }
+
+            #right_header_large {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            #right_header_large p {
+                margin: 0;
+                padding: 0;
+            }
+
+            .header_contact {
+                display: none;
+            }
+
+            #langvi img,
+            #langen img {
+                width: 22px;
+                height: 16px;
+            }
+
+            #socials i {
+                font-size: 1.2em;
+            }
+
+            #menu_large {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            #menu_large button {
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            #menu_large button:first-child {
+                padding-left: 0;
+            }
+
+            .menu_large_item__sub {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100vw;
+                background-color: #fff;
+                box-shadow: 0px 0px 10px 0px #0000001a;
+                z-index: 100;
+            }
+
+
+            .menu_large_item__sub a {
+                padding: 10px 10px;
+                text-decoration: none;
+                color: #666;
+            }
+
+            #container {
+                display: grid;
+                grid-template-columns: 3fr 2fr;
+                gap: 100px;
+                padding: 40px 20px;
+            }
+
+            .right_container img {
+                width: 100%;
+            }
+
+            .right_container .image {
+                width: 100%;
+            }
+
+            .right_container .title {
+                text-transform: uppercase;
+                border-top: 1px solid #ddd;
+            }
+
+            .right_container .title a {
+                font-weight: 500;
+                color: #666;
+            }
+
+            .right_container ul {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .right_container li {
+                display: flex;
+                width: 100%;
+                background: #f1f1f1;
+                padding: 5px 1em 10px;
+                align-items: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .right_container .number {
+                display: inline-block;
+                font-size: 2.5em;
+                line-height: 50px;
+                font-family: "UTMAvo", sans-serif;
+                color: #a2a2a2;
+                margin-top: 0;
+                margin-right: 5px;
+            }
+
+            .right_container li a {
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .right_container li h3 {
+                font-size: 1.2em;
+                font-weight: 400;
+                color: #666;
+                margin: 0;
+            }
+
+            .right_container li p {
+                font-size: 12px;
+                color: #717171;
+                margin: 0 0 3px;
+            }
+
+            #header_contact_large {
+                display: flex;
+                gap: 10px;
+            }
+
+            .header_contact_large__email,
+            .header_contact_large__phone {
+                display: flex;
+                align-items: center;
+                font-weight: lighter;
+                font-size: 13px;
+            }
+
+            #sub_menu_for_thiet_ke,
+            #sub_menu_for_thi_cong,
+            #sub_menu_for_tap_chi,
+            #sub_menu_for_bao_gia,
+            #sub_menu_for_gioi_thieu {
+                display: none;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
+
+        @media only screen and (min-width: 1200px) {
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            .logo_and_bars {
+                width: 100%;
+                z-index: 1000;
+                justify-content: space-between;
+                padding: 10px 20px;
+            }
+
+            .logo_for_mobile {
+                display: block;
+            }
+
+            .logo_for_mobile img {
+                width: 100px;
+            }
+
+            .bars {
+                display: block;
+                color: #f7982c;
+            }
+
+            .bars i {
+                color: #f7982c;
+                font-size: 28px;
+            }
+
+            .header_contact {
+                position: relative;
+                max-height: 100%;
+                display: flex;
+                background-color: #fff;
+                justify-content: space-around;
+                border-top: 1px solid #ddd;
+            }
+
+            .header_contact a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            .header_contact div {
+                display: flex;
+                gap: 10px;
+            }
+
+            .header_contact__email,
+            .header_contact__phone {
+                display: flex;
+                align-items: center;
+                font-weight: lighter;
+                font-size: 13px;
+            }
+
+            .bars {
+                font-size: 28px;
+            }
+
+            #container {
+                margin-top: 100px;
+                padding: 0 0.75rem
+            }
+
+            footer {
+                padding: 0 0.75rem;
+                text-align: center;
+            }
+
+            .content h5 {
+                font-size: 1.4em;
+                line-height: 110%;
+                margin: 0.82rem 0 0.656rem;
+                font-weight: 400;
+            }
+
+            .content h6 {
+                font-size: 1.2em;
+                line-height: 110%;
+                margin: 0.5rem 0 0.4rem;
+                font-weight: 400;
+            }
+
+            .content a {
+                text-decoration: none;
+                color: #0000FF;
+            }
+
+            .content img {
+                width: 100%;
+            }
+
+            .right-container .title {
+                text-transform: uppercase;
+                border-top: 1px solid #ddd;
+                font-size: 1em;
+            }
+
+            .right-container .title a {
+                font-weight: 500;
+                color: #666;
+            }
+
+            .right-container ul {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .right-container li {
+                display: flex;
+                width: 100%;
+                background: #f1f1f1;
+                padding: 5px 1em 10px;
+                align-items: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .right-container .number {
+                display: inline-block;
+                font-size: 2.5em;
+                line-height: 50px;
+                font-family: "UTMAvo", sans-serif;
+                color: #a2a2a2;
+                margin-top: 0;
+                margin-right: 5px;
+            }
+
+            .right-container li a {
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .right-container li h3 {
+                font-size: 1em;
+                font-weight: 400;
+                margin: 0;
+            }
+
+            .right-container li p {
+                font-size: 12px;
+                color: #717171;
+                margin: 0 0 3px;
+            }
+
+            .right-container li p,
+            .right-container li h3 {
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .image img {
+                width: 100%;
+            }
+
+            .parent {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .sub-section {
+                display: flex;
+                flex-direction: column;
+                padding-left: 20px;
+            }
+
+            .sub-section {
+                display: none;
+            }
+
+            .sub-section a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            #side_menu {
+                display: none;
+                position: fixed;
+                right: 0;
+                width: 50%;
+                min-height: 100%;
+                background-color: #fff;
+                z-index: 100;
+                padding: 20px;
+                flex-direction: column;
+            }
+
+            .sub-section_button {
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .rotate {
+                transform: rotate(90deg);
+            }
+
+            #share_icons {
+                display: flex;
+                justify-content: space-around;
+                margin: 10px 0px;
+            }
+
+            .side_contact__email,
+            .side_contact__phone {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                padding: 5px 10px;
+                border: #dddddd 1px solid;
+                text-align: center;
+                align-items: center;
+                font-weight: lighter;
+                font-size: 13px;
+            }
+
+            #black_overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 99;
+            }
+
+            #side_menu_button {
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            #contact_area {
+                position: fixed;
+                z-index: 100;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            #contact_popup {
+                display: none;
+                position: fixed;
+                bottom: 70px;
+                right: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                z-index: 100;
+            }
+
+            #contact_popup .contact_method {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                gap: 10px;
+                margin: 10px 0;
+            }
+
+            #contact_popup .contact_method a {
+                color: #666;
+                text-decoration: none;
+            }
+
+            #contact_popup .contact_method i {
+                padding: 10px;
+                background-color: #f7982c;
+                border-radius: 100%;
+            }
+
+            #contact_popup .contact_method p {
+                margin: 0;
+                text-align: left;
+            }
+
+            .contact_popup__header {
+                color: white;
+                background-color: #f7982c;
+                padding: 20px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            #contact_popup::after {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                /* Adjust this value to position the tail */
+                right: 20px;
+                /* Adjust this value to position the tail */
+                border-width: 10px;
+                border-style: solid;
+                border-color: transparent #fff transparent transparent;
+                /* Adjust the colors to match your popup */
+            }
+
+            #contact_now {
+                display: flex;
+                position: relative;
+                width: 40px;
+                height: 40px;
+            }
+
+            #contact_now_button {
+                position: relative;
+                background-color: #fff;
+                color: #fff;
+                border: none;
+                aspect-ratio: 1/1;
+                border-radius: 100%;
+                border: solid 5px #f7982c;
+                cursor: pointer;
+                transition: transform 0.5s ease-in-out;
+                margin: 0px;
+                z-index: 100;
+            }
+
+            #contact_now_button i {
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            #green_point {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: #00ff00;
+                border-radius: 100%;
+                width: 10px;
+                height: 10px;
+            }
+
+            .active_block {
+                display: block !important;
+            }
+
+            #email_button {
+                background-color: #fff;
+                border: none;
+                color: #fff;
+            }
+
+            #email_modal {
+                display: none;
+                position: fixed;
+                bottom: 70px;
+                right: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                z-index: 100;
+            }
+
+            #email_modal_close {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background-color: #f7982c;
+                color: #fff;
+                border-radius: 100%;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                line-height: 20px;
+                cursor: pointer;
+                padding: 0;
+                margin: 0;
+            }
+
+            #email_modal_content {
+                padding: 20px;
+            }
+
+            #contact_form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .field {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+            }
+
+            .logo_for_large {
+                display: grid;
+                grid-template-columns: 1fr 4fr;
+                padding: 10px 200px;
+                gap: 50px;
+                background-color: #fff;
+                box-shadow: 0px 0px 10px 0px #0000001a;
+            }
+
+            #change_logo_box {
+                padding-left: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: left;
+                gap: 10px;
+                width: 300px;
+                overflow: hidden;
+                position: relative;
+                transition: height 0.3s ease-in-out;
+            }
+
+            #scroll_up_logo,
+            #scroll_down_logo {
+                position: absolute;
+                transition: transform 0.3s ease-in-out;
+            }
+
+            #scroll_down_logo {
+                height: auto;
+                transform: translateY(300%);
+            }
+
+            .site_title {
+                margin: 0;
+                text-transform: uppercase;
+                transform: translateY(0px);
+                transition: transform 0.5s ease-in-out;
+            }
+
+            .site_title p {
+                margin: 0;
+                padding: 0;
+            }
+
+            .text-orange {
+                color: #f7982c;
+                font-weight: 600;
+                text-transform: none;
+                font-size: 20px;
+            }
+
+            #socials {
+                display: flex;
+                gap: 50px;
+                justify-content: space-between;
+            }
+
+            #right_header_large {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            #right_header_large p {
+                margin: 0;
+                padding: 0;
+            }
+
+            .header_contact {
+                display: none;
+            }
+
+            #langvi img,
+            #langen img {
+                width: 22px;
+                height: 16px;
+            }
+
+            #socials i {
+                font-size: 1.2em;
+            }
+
+            #menu_large {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            #menu_large button {
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 10px 20px 0px 20px;
+            }
+
+            #menu_large button:first-child {
+                padding-left: 0;
+            }
+
+            .menu_large_item__sub {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100vw;
+                background-color: #fff;
+                box-shadow: 0px 0px 10px 0px #0000001a;
+                z-index: 100;
+            }
+
+
+            .menu_large_item__sub a {
+                padding: 10px 10px;
+                text-decoration: none;
+                color: #666;
+            }
+
+            #container {
+                display: grid;
+                grid-template-columns: 3fr 2fr;
+                gap: 100px;
+                padding: 40px 200px;
+            }
+
+            .right_container img {
+                width: 100%;
+            }
+
+            .right_container .image {
+                width: 100%;
+            }
+
+            .right_container .title {
+                text-transform: uppercase;
+                border-top: 1px solid #ddd;
+            }
+
+            .right_container .title a {
+                font-weight: 500;
+                color: #666;
+            }
+
+            .right_container ul {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .right_container li {
+                display: flex;
+                width: 100%;
+                background: #f1f1f1;
+                padding: 5px 1em 10px;
+                align-items: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .right_container .number {
+                display: inline-block;
+                font-size: 2.5em;
+                line-height: 50px;
+                font-family: "UTMAvo", sans-serif;
+                color: #a2a2a2;
+                margin-top: 0;
+                margin-right: 5px;
+            }
+
+            .right_container li a {
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .right_container li h3 {
+                font-size: 1.2em;
+                font-weight: 400;
+                color: #666;
+                margin: 0;
+            }
+
+            .right_container li p {
+                font-size: 12px;
+                color: #717171;
+                margin: 0 0 3px;
+            }
+
+            #header_contact_large {
+                display: flex;
+                gap: 10px;
+            }
+
+            .header_contact_large__email,
+            .header_contact_large__phone {
+                display: flex;
+                align-items: center;
+                font-weight: lighter;
+                font-size: 13px;
+            }
+
+            #sub_menu_for_thiet_ke,
+            #sub_menu_for_thi_cong,
+            #sub_menu_for_tap_chi,
+            #sub_menu_for_bao_gia,
+            #sub_menu_for_gioi_thieu {
+                display: none;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo_and_bars">
+            <div class="logo_for_mobile">
+                <img loading="lazy" src="https://mdesign.vn/wp-content/themes/mdesign/img/mdesign-logo-shrink.svg" alt="logo">
+            </div>
+            <div class="bars">
+                <button id="side_menu_button">
+                    <i class="fa-solid fa-bars">
+                    </i>
+                </button>
+            </div>
+        </div>
+
+        <div class="logo_for_large">
+            <div id="change_logo_box">
+                <img loading="lazy" width="150px" id="scroll_up_logo"
+                    src="https://mdesign.vn/wp-content/themes/mdesign/img/mdesign-logo.svg" alt="logo">
+                <img loading="lazy" width="250px" height="100px" id="scroll_down_logo"
+                    src="https://mdesign.vn/wp-content/themes/mdesign/img/mdesign-logo-shrink.svg" alt="logo">
+            </div>
+            <div>
+                <div id="right_header_large">
+                    <div>
+                        <p class="site_title">Công ty TNHH <span><span class="text-orange">m</span>Design</span></p>
+                    </div>
+                    <div id="socials">
+                        <div>
+                            <a id="langvi" href="#">
+                                <img loading="lazy" src="https://mdesign.vn/wp-content/themes/mdesign/img/vi-flag.svg" alt="vi">
+                            </a>
+                            <a id="langen" href="#">
+                                <img loading="lazy" src="https://mdesign.vn/wp-content/themes/mdesign/img/en-flag.svg" alt="en">
+                            </a>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <div>
+                                <a href="#" target="_blank">
+                                    <i class="fa-brands fa-facebook" style="color: #0000FF;"></i>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#" target="_blank">
+                                    <i class="fa-brands fa-skype" style="color: #00aff0;"></i>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#" target="_blank">
+                                    <i class="fa-brands fa-instagram" style="color: #8a3ab9;"></i>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#" target="_blank">
+                                    <i class="fa-brands fa-pinterest" style="color: #bd081c;"></i>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#" target="_blank">
+                                    <i class="fa-brands fa-youtube" style="color: #ff0000;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="menu_large">
+                    <div style="display: flex; flex-wrap: nowrap">
+                        <button id="button_thiet_ke" class="menu_large_item">
+                            Thiết kế
+                        </button>
+                        <button id="button_thi_cong" class="menu_large_item">
+                            Thi công
+                        </button>
+                        <button id="button_tap_chi" class="menu_large_item">
+                            Tạp chí
+                        </button>
+                        <button id="button_bao_gia" class="menu_large_item">
+                            Báo giá
+                        </button>
+                        <button id="button_gioi_thieu" class="menu_large_item">
+                            Giới thiệu
+                        </button>
+                    </div>
+                    <div id="header_contact_large">
+                        <div class="header_contact_large__email">
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href="mailto:abc@gmail.com">abc@gmail.com</a>
+                        </div>
+                        <div class="header_contact_large__phone">
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:+84909376938">(+84) 909376938</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header_contact">
+                <div class="header_contact__email">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:contact@mdesign.vn">contact@mdesign.vn</a>
+                </div>
+                <div class="header_contact__phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+84909376938">(+84) 909376938</a>
+                </div>
+                <div id="side_menu">
+                    <div id="parental_sections">
+                        <div class="section">
+                            <div class="parent">
+                                <div>
+                                    Thiết kế
+                                </div>
+                                <button class="sub-section_button">
+                                    <i class="fa-solid fa-chevron-right "></i>
+                                </button>
+                            </div>
+                            <div class="sub-section">
+                                <a href="https://mdesign.vn/danh-muc/thiet-ke/noi-that">Nội thất</a>
+                                <a href="https://mdesign.vn/danh-muc/thiet-ke/kinh-doanh">Kinh doanh</a>
+                                <a href="https://mdesign.vn/danh-muc/thiet-ke/du-lich">Du lịch</a>
+                                <a href="https://mdesign.vn/danh-muc/thiet-ke/du-an">Dự án</a>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="parent">
+                                <div>
+                                    Thi công
+                                </div>
+                                <button class="sub-section_button">
+                                    <i class="fa-solid fa-chevron-right "></i>
+                                </button>
+                            </div>
+                            <div class="sub-section">
+                                <a href="https://mdesign.vn/danh-muc/thi-cong/noi-that">Nội thất</a>
+                                <a href="https://mdesign.vn/danh-muc/thi-cong/kinh-doanh">Kinh doanh</a>
+                                <a href="https://mdesign.vn/danh-muc/thi-cong/du-lich">Du lịch</a>
+                                <a href="https://mdesign.vn/danh-muc/thi-cong/du-an">Dự án</a>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="parent">
+                                <div>
+                                    Tạp chí
+                                </div>
+                                <button class="sub-section_button">
+                                    <i class="fa-solid fa-chevron-right "></i>
+                                </button>
+                            </div>
+                            <div class="sub-section">
+                                <a href="https://mdesign.vn/danh-muc/du-an/noi-that">Nội thất</a>
+                                <a href="https://mdesign.vn/danh-muc/du-an/kinh-doanh">Kinh doanh</a>
+                                <a href="https://mdesign.vn/danh-muc/du-an/du-lich">Du lịch</a>
+                                <a href="https://mdesign.vn/danh-muc/du-an/du-an">Dự án</a>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="parent">
+                                <div>
+                                    Báo giá
+                                </div>
+                                <button class="sub-section_button">
+                                    <i class="fa-solid fa-chevron-right "></i>
+                                </button>
+                            </div>
+                            <div class="sub-section">
+                                <a href="https://mdesign.vn/gioi-thieu">Giới thiệu</a>
+                                <a href="https://mdesign.vn/lien-he">Liên hệ</a>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="parent">
+                                <div>
+                                    Giới thiệu
+                                </div>
+                                <button class="sub-section_button">
+                                    <i class="fa-solid fa-chevron-right "></i>
+                                </button>
+                            </div>
+                            <div class="sub-section">
+                                <a href="https://mdesign.vn/gioi-thieu">Giới thiệu</a>
+                                <a href="https://mdesign.vn/lien-he">Liên hệ</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="share_icons">
+                        <!-- Facebook -->
+                        <a href="#" target="_blank">
+                            <i class="fa-brands fa-facebook" style="color: #0000FF;"></i>
+                        </a>
+                        <!-- Skype -->
+                        <a href="#" target="_blank">
+                            <i class="fa-brands fa-skype" style="color: #00aff0;"></i>
+                        </a>
+                        <!-- Instagram -->
+                        <a href="#" target="_blank">
+                            <i class="fa-brands fa-instagram" style="color: #8a3ab9;"></i>
+                        </a>
+                        <!-- Pinterest -->
+                        <a href="#" target="_blank">
+                            <i class="fa-brands fa-pinterest" style="color: #bd081c;"></i>
+                        </a>
+                        <!-- Youtube -->
+                        <a href="#" target="_blank">
+                            <i class="fa-brands fa-youtube" style="color: #ff0000;"></i>
+                        </a>
+                    </div>
+                    <div id="contact">
+                        <div class="side_contact__phone">
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:+84909376938" target="_blank">(+84) 909376938</a>
+                        </div>
+                        <div class="side_contact__email">
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href="mailto:abc@" target="_blank">abc@</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="header_contact_large">
+                    <div class="header_contact__email">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:contact@mdesign.vn">contact@mdesign.vn</a>
+                    </div>
+                    <div class="header_contact__phone">
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:+84909376938">(+84) 909376938</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sub_menu_large">
+            <div id="sub_menu_for_thiet_ke">
+                <a href="https://mdesign.vn/danh-muc/thiet-ke/noi-that">Nội thất</a>
+                <a href="https://mdesign.vn/danh-muc/thiet-ke/kinh-doanh">Kinh doanh</a>
+                <a href="https://mdesign.vn/danh-muc/thiet-ke/du-lich">Du lịch</a>
+                <a href="https://mdesign.vn/danh-muc/thiet-ke/du-an">Dự án</a>
+            </div>
+            <div id="sub_menu_for_thi_cong">
+                <a href="https://mdesign.vn/danh-muc/thi-cong/noi-that">Nội thất</a>
+                <a href="https://mdesign.vn/danh-muc/thi-cong/kinh-doanh">Kinh doanh</a>
+                <a href="https://mdesign.vn/danh-muc/thi-cong/du-lich">Du lịch</a>
+                <a href="https://mdesign.vn/danh-muc/thi-cong/du-an">Dự án</a>
+            </div>
+            <div id="sub_menu_for_tap_chi">
+                <a href="https://mdesign.vn/danh-muc/du-an/noi-that">Nội thất</a>
+                <a href="https://mdesign.vn/danh-muc/du-an/kinh-doanh">Kinh doanh</a>
+                <a href="https://mdesign.vn/danh-muc/du-an/du-lich">Du lịch</a>
+                <a href="https://mdesign.vn/danh-muc/du-an/du-an">Dự án</a>
+            </div>
+            <div id="sub_menu_for_bao_gia">
+                <a href="https://mdesign.vn/gioi-thieu">Giới thiệu</a>
+                <a href="https://mdesign.vn/lien-he">Liên hệ</a>
+            </div>
+            <div id="sub_menu_for_gioi_thieu">
+                <a href="https://mdesign.vn/gioi-thieu">Giới thiệu</a>
+                <a href="https://mdesign.vn/lien-he">Liên hệ</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="container">
+        <div class="left-container">
+            <div class="title">
+                <h1>GỖ MDF TRONG THIẾT KẾ NỘI THẤT: ĐẸP VÀ THÂN THIỆN VỚI MÔI TRƯỜNG</h1>
+            </div>
+            <div class="content">
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-2.jpg" />
+                </p>
+                <p>
+                    Gỗ MDF ngày càng trở nên phổ biến hơn trong giới thiết kế nội thất và người tiêu dùng phổ thông. Và
+                    điều
+                    này không có gì đáng ngạc nhiên bởi nó có vô số ưu điểm.
+                </p>
+                <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-1.jpg" />
+                <p>
+                    MDF viết tắt của Medium-Density Fiberboard, theo tiếng Việt chúng ta có thể hiểu là tấm ván có tỉ
+                    trọng
+                    sợ trung bình. Thành phần chính của MDF là các loại gỗ tự nhiên được tận dụng (vụn gỗ, khúc cây,..)
+                    được
+                    nghiền nát tạo thành các sợ nhỏ, xử lý loại bỏ tạp chất rồi kết dính lại với nhau bằng keo chuyên
+                    dụng
+                    trong máy nén nhiệt cường độ cao, tạo nên những tấm ván nguyên khối sử dụng trong việc sản xuất đồ
+                    gỗ
+                    nội thất.
+                </p>
+                <p>
+                    Do đó, nó hoàn toàn thân thiện với môi trường. Các tấm MDF khi được xử lý bằng các dung dịch chống
+                    nước
+                    và chống cháy đặc biệt, sẽ rất chắc và bền, có khả năng chống ẩm và chống cháy.
+                </p>
+                <p>
+                    Vì vậy khi bạn tìm một vật liệu để trang trí hay làm đồ nội thất thì MDF là một vật liệu hoàn toàn
+                    phù
+                    hợp và không bị lỗi thời.
+                </p>
+                <p>
+                    Thực tế MDF còn rất nhiều ưu điểm, và bên cạnh đó tất nhiên cũng còn nhiều hạn chế. Bài viết này
+                    không
+                    phân tích sâu vào đặc tính kỹ thuật của gỗ MDF nhưng chúng tôi sẽ giúp bạn hiểu rõ hơn bằng việc đưa
+                    ra
+                    một số vị dụ cụ thể về việc sử dụng vật liệu này trong
+                    <a href="https://mdesign.vn/danh-muc/thiet-ke/noi-that">thiết kế nội thất</a>
+                    .
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-13.jpg" />
+                </p>
+                <h5>
+                    Ưu điểm
+                </h5>
+                <h6>
+                    Thân thiện với môi trường
+                </h6>
+                <p>
+                    MDF được làm từ nguyên liệu hoàn toàn tự nhiên sau khi loại bỏ các tạp chất, ép thành tấm bằng
+                    phương
+                    pháp ép nhiệt khô, vai trò liên kết chính là từ chất lignin – một thành phần hữu cơ trong gỗ được
+                    giải
+                    phóng trong môi trường áp suất cao. Vì vậy MDF hoàn toàn thân thiện với môi trường.
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-18.jpg" />
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-17.jpg" />
+                </p>
+                <h6>
+                    Dễ lắp đặt
+                </h6>
+                <p>
+                    Việc lắp đặt các tấm MDF không yêu cầu cao bất cứ kỹ năng đặc biệt nào, một người nghiệp dư tìm hiểu
+                    vẫn
+                    có thể làm được.
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-20.jpg" />
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-19.jpg" />
+                </p>
+                <h6>
+                    Thẫm mỹ
+                </h6>
+                <p>
+                    Sự đang dạng về màu sắc bề mặt, linh hoạt về liên kết cho phép thực hiện các mẫu
+                    <a href="https://mdesign.vn/danh-muc/thiet-ke/noi-that">thiết kế nội thất</a>
+                    đặc sắc nhất.
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-22.jpg" />
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-21.jpg" />
+                </p>
+                <h6>
+                    Dễ vệ sinh
+                </h6>
+                <p>
+                    Bề mặt nhẵn láng dễ lau chùi vệ sinh
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-4.jpg" />
+                </p>
+                <h6>
+                    Giá thành
+                </h6>
+                <p>Giá của tấm MDF phụ thuộc vào vật liệu hoàn thiện bên ngoài, nhưng so với những ưu điểm của nó thì
+                    khá là
+                    hợp lý và phải chăng.</p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-6.jpg" />
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-5.jpg" />
+                </p>
+                <h5>
+                    Nhược điểm
+                </h5>
+                <h6>
+                    Chống thấm tương đối
+                </h6>
+                <p>
+                    Dù đã được xử lý bằng các chất bảo vệ, nhưng phần nhạy cảm nhất của MDF là các cạnh viền thường
+                    xuyên
+                    tiếp xúc với độ ẩm khiến chúng dễ bị nở. Do đó môi trường vị trí ứng dụng cũng phải cân nhắc phù hợp
+                    với
+                    đặc tính của MDF.
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-7.jpg" />
+                </p>
+                <h6>
+                    Tiêu hao vật tư
+                </h6>
+                <p>
+                    Thi công lắp dựng tấm MDF cần có hệ khung để liên kết, nghĩa là tốn nhiều vật tư hơn để hoàn thiện.
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-8.jpg" />
+                </p>
+                <h6>
+                    Dễ cháy
+                </h6>
+                <p>
+                    Gỗ hay ván dăm nói riêng dễ và cháy khá nhanh, do đó nếu không được xử lý đặc biệt bằng các chất
+                    chống
+                    cháy, ván MDF có thể cực kỳ dễ cháy.
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-9.jpg" />
+                </p>
+                <h5>
+                    Làm thế nào để ứng dụng MDF trong thiết kế nội thất
+                </h5>
+                <h6>
+                    Ốp tường
+                </h6>
+                <p>
+                    Sự đang dạng bề mặt hoàn thiện của MDF cung cấp linh hoạt giải pháp trang trí. Một trong những lựa
+                    chọn
+                    phổ biến là MDF phủ Veneer gỗ tự nhiên, hoặc MDF phủ màng Melamine với vô số các vân bề mặt hoàn
+                    thiện
+                    khác nhau.
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-10.jpg" />
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-11.jpg" />
+                </p>
+                <h6>
+                    Các hoàn thiện khác
+                </h6>
+                <p>
+                    Trên thực tế, ứng dụng MDF trong thiết kế nội thất là không giới hạn. Tường, trần, cửa, tủ,… Với ưu
+                    thế
+                    là dễ thi công lắp đặt, việc thi công chỉ để lại một lượng nhỏ bụi mịn, không nhiều gỗ thừa hay dăm
+                    bào
+                    như gỗ tự nhiên.
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-12.jpg" />
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-14.jpg" />
+                </p>
+                <h6>
+                    Tấm trang trí
+                </h6>
+                <p>
+                    Ván MDF phủ Veneer hay Melamine có thể được sử dụng tối ưu nhất để làm các điểm nhấn trang trí. Như
+                    ốp
+                    cột hoặc vách trong làm điểm nhấn trong phòng khách, phòng ăn…
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-15.jpg" />
+                </p>
+                <h6>
+                    Làm tủ
+                </h6>
+                <p>
+                    Thông dụng nhất là ứng dụng để làm tủ, có thể là tủ bếp, tủ áo, tủ đồ gia dụng,… ngoài ra còn có thể
+                    sử
+                    dụng để hoàn thiện sàn, tường, cửa và đôi khi các vật dụng khác như đèn, bàn nhỏ,…
+                </p>
+                <p>
+                    <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-16.jpg" />
+                </p>
+                <p style="text-align: right;"><em>Theo homeklondike</em></p>
+            </div>
+        </div>
+        <div class="right_container">
+            <div class="title">
+                <h2>
+                    <a href="/#">Dự án gần đây</a>
+                </h2>
+            </div>
+            <div class="image">
+                <img loading="lazy" src="./assets/images/thiet-ket-noi-that-can-ho-feliz-en-vista-600x400.jpg" />
+            </div>
+            <ul class="links">
+                <div class="article_link">
+                    <li>
+                        <div class="number">1.</div>
+                        <a href="/#">
+                            <h3>FELIZ EN VISTA – CẢI TẠO NỘI THẤT</h3>
+                            <p>CÔNG TRÌNH: CĂN HỘ CHUNG CƯ LOẠI HÌNH: CẢI TẠO NỘI THẤT ĐỊA CHỈ: FELIZ EN VISTA, TP. THỦ
+                                ĐỨC, TP. HCM HOÀN THÀNH: 2023 Với tiêu chí là sự mộc mạc gần gũi, các...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">2.</div>
+                        <a href="/#">
+                            <h3>THỰC TẾ THI CÔNG – NỘI THẤT NHÀ PHỐ – VÕ OANH – BÌNH THẠNH</h3>
+                            <p>LOẠI HÌNH: NỘI THẤT NHÀ PHỐ ĐỊA CHỈ: VÕ OANH – BÌNH THẠNH QUY MÔ: 5M X 18M HOÀN THÀNH:
+                                2023 Hình ảnh thực tế nội thất phòng khách Không gian hành lang – kệ...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">3.</div>
+                        <a href="/#">
+                            <h3>CẢI TẠO KIẾN TRÚC NỘI THẤT NHÀ PHỐ – VÕ OANH</h3>
+                            <p>CÔNG TRÌNH: NHÀ PHỐ LOẠI HÌNH: CẢI TẠO KIẾN TRÚC NỘI THẤT ĐỊA CHỈ: VÕ OANH, BÌNH THANH,
+                                TP. HCM HOÀN THÀNH: 2023 Mặt tiền cải tạo Nội thất tầng trệt Nội thất phòng ngủ...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">4.</div>
+                        <a href="/#">
+                            <h3>THIẾT KẾ THI CÔNG GIAN HÀNG TRIỄN LÃM BCI- VASTA BOOTH</h3>
+                            <p>CÔNG TRÌNH: VASTA BOOTH LOẠI HÌNH: GIAN HÀNG TRIỄN LÃM VỊ TRÍ: BCI SHERATON, Q.1 HOÀN
+                                THÀNH: 2023</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">5.</div>
+                        <a href="/#">
+                            <h3>FELIZ EN VISTA – CẢI TẠO NỘI THẤT</h3>
+                            <p>CÔNG TRÌNH: CĂN HỘ CHUNG CƯ LOẠI HÌNH: CẢI TẠO NỘI THẤT ĐỊA CHỈ: FELIZ EN VISTA, TP. THỦ
+                                ĐỨC, TP. HCM HOÀN THÀNH: 2023 Với tiêu chí là sự mộc mạc gần gũi, các...</p>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <div class="title">
+                <h2>
+                    <a href="/#">Thiết kế nổi bật</a>
+                </h2>
+            </div>
+            <div class="image">
+                <img loading="lazy" src="./assets/images/thiet-ke-can-ho-nho-be-22m2-mdesign_11-3-600x400.jpg" />
+            </div>
+            <ul class="links">
+                <div class="article_link">
+                    <li>
+                        <div class="number">1.</div>
+                        <a href="/#">
+                            <h3>TỐI ƯU KHÔNG GIAN TRONG CĂN HỘ NHỎ BÉ – 22M2</h3>
+                            <p>Ở những thành phố mà giá nhà ở đắt đỏ như Đài Bắc, thì những căn hộ với diện tích nhỏ
+                                đang được giới trẻ hướng đến. Một không gian sống nhỏ gọn, đầy đủ...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">2.</div>
+                        <a href="/#">
+                            <h3>KHÁM PHÁ CĂN HỘ 22M2 TIỆN NGHI Ở ĐÀI BẮC</h3>
+                            <p>Căn hộ nhỏ này ở Đài Bắc, Đài loan, thiết kế bởi một Studio được đánh giá khá cao trong
+                                khả năng sáng tạo – A little Design Studio. Mặc dù diện tích chỉ vỏn...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">3.</div>
+                        <a href="/#">
+                            <h3>THIẾT KẾ ĐỘC ĐÁO VỚI NGÔI NHÀ HÌNH TAM GIÁC T-HOUSE</h3>
+                            <p>T – House là một tòa nhà hình tam giác, nằm trong cụm công trình Lviv, Ukraine. Kiến trúc
+                                của tòa nhà mang ý tưởng từ nhà Karpathian truyền thống của Ucraina. Ngôi nhà có...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">4.</div>
+                        <a href="/#">
+                            <h3>CĂN HỘ VƯỜN TRÊN MÁI – BEZMIRNO STUDIO</h3>
+                            <p>Dự án này là có tên gọi là Roof Garden – Căn hộ vườn trên mái được thiết kế bởi nhóm kiến
+                                trúc sư Bezmirno, phân chia không gian một cách hoàn hảo không gian...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">5.</div>
+                        <a href="/#">
+                            <h3>NGÔI NHÀ THÔNG THOÁNG VÀ TRÀN NGẬP ÁNH SÁNG TỰ NHIÊN</h3>
+                            <p>Thiết kế hiện đại, đơn giản và tận dụng một cách khéo léo chiếu sáng và thông gió tự
+                                nhiên là điểm nôi bật của ngôi nhà này. Ngôi nhà với kích thước 5,9m x...</p>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <div class="title">
+                <h2>
+                    <a href="/#">Chia sẻ kinh nghiệm</a>
+                </h2>
+            </div>
+            <div class="image">
+                <img loading="lazy" src="./assets/images/go-mdf-trong-thiet-ke-noi-that-10-600x400.jpg" />
+            </div>
+            <ul class="links">
+                <div class="article_link">
+                    <li>
+                        <div class="number">1.</div>
+                        <a href="/#">
+                            <h3>GỖ MDF TRONG THIẾT KẾ NỘI THẤT: ĐẸP VÀ THÂN THIỆN VỚI MÔI TRƯỜNG</h3>
+                            <p>Gỗ MDF ngày càng trở nên phổ biến hơn trong giới thiết kế nội thất và người tiêu dùng phổ
+                                thông. Và điều này không có gì đáng ngạc nhiên bởi nó có vô số...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">2.</div>
+                        <a href="/#">
+                            <h3>10 Ý TƯỞNG TỦ BẾP HIỆN ĐẠI LÀM MỚI CĂN BẾP CỦA BẠN</h3>
+                            <p>Nếu bạn đã có một không gian nội thất hiện đại, thì tủ bếp hiện đại là một lựa chọn hiển
+                                nhiên – nhưng đó không hẳn là một lựa chọn bắt buộc. Kiểu dáng...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">3.</div>
+                        <a href="/#">
+                            <h3>50 Ý TƯỞNG THIẾT KẾ CĂN HỘ STUDIO NHỎ 2019 (P2)</h3>
+                            <p>Xem phần 1: 50 Ý TƯỞNG THIẾT KẾ CĂN HỘ STUDIO NHỎ 2019 (P1) 13. Nâng cao khu vực bếp –
+                                giấu giường bên dưới Trong thiết kế này, một lần nữa chiếc giường đôi...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">4.</div>
+                        <a href="/#">
+                            <h3>50 Ý TƯỞNG THIẾT KẾ CĂN HỘ STUDIO NHỎ 2019 (P1)</h3>
+                            <p>Chúng tôi đã tổng hợp đầy đủ danh sách 50 ý tưởng thiết kế căn hộ studio nhỏ này vì chúng
+                                tôi muốn truyền cảm hứng và khuyến khích chủ sở hữu của những nơi...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">5.</div>
+                        <a href="/#">
+                            <h3>14 Ý TƯỞNG VÀ CẢM HỨNG CHO BAN CÔNG CĂN HỘ</h3>
+                            <p>Ban công có thể xem như là tiện ích sau cùng của một căn hộ. Dưới đây là một số ý tưởng
+                                cơ bản để có thể giúp bạn biến đổi không gian ngoài trời...</p>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <div class="title">
+                <h2>
+                    <a href="/#">Phong thủy</a>
+                </h2>
+            </div>
+            <div class="image">
+                <img loading="lazy" src="./assets/images/la-freschezza-del-verde-12-768x575-600x400.jpg" />
+            </div>
+            <ul class="links">
+                <div class="article_link">
+                    <li>
+                        <div class="number">1.</div>
+                        <a href="/#">
+                            <h3>MÀU SẮC CỦA MỆNH THỔ THEO PHONG THỦY</h3>
+                            <p>CHỌN MÀU NỘI THẤT THEO MỆNH THỔ Không gian nội thất dành cho người mệnh thổ thường khá
+                                đơn giản, mộc mạc và được bài trí tự nhiên, gọn gàng. Hành thổ là biểu tượng...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">2.</div>
+                        <a href="/#">
+                            <h3>MÀU SẮC CỦA MỆNH HỎA THEO PHONG THỦY</h3>
+                            <p>CHỌN MÀU NỘI THẤT THEO MỆNH HỎA Gia chủ có thể chọn màu của Mộc (xanh lá) vì Mộc sinh Hỏa
+                                hay chọn đúng màu bản mệnh của Hỏa như đỏ, hồng, tím. Hành Hỏa...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">3.</div>
+                        <a href="/#">
+                            <h3>MÀU SẮC CỦA MỆNH MỘC THEO PHONG THỦY</h3>
+                            <p>CHỌN MÀU NỘI THẤT THEO MỆNH MỘC Không gian nội thất dành cho người mệnh Mộc thường có
+                                tính ngẫu hứng, sự mộc mạc và yếu tố tự nhiên chủ nghĩa. Trong phong thủy, màu...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">4.</div>
+                        <a href="/#">
+                            <h3>MÀU SẮC CỦA MỆNH THỦY THEO PHONG THỦY</h3>
+                            <p>CHỌN MÀU NỘI THẤT THEO MỆNH THỦY Nước là đối tượng có thể ở nhiều trạng thái khác nhau
+                                như: chất lỏng, chất khí (hơi nước), chất rắn (băng giá) và luôn thay đổi linh...</p>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="number">5.</div>
+                        <a href="/#">
+                            <h3>MÀU SẮC CỦA MỆNH KIM THEO PHONG THỦY</h3>
+                            <p>CHỌN MÀU NỘI THẤT THEO MỆNH KIM Hành Kim là biểu tượng của mùa thu và sức mạnh. Người
+                                mệnh Kim thường thể hiện rõ sức mạnh tinh thần và sự cương quyết, quả quyết...</p>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Xưởng sản xuất: 17/36 Đường An Phú Đông 25, An Phú Đông, Quận 12, TP.HCM</p>
+
+        © Copyright 2017
+        <a href="https://mdesign.vn">mdesign.vn </a>
+        <span> | </span>
+        Maded by
+        <a href="https://fb.com/cuongphamquoc">CuongPham</a>
+    </footer>
+
+    <div id="black_overlay"></div>
+
+    <div id="contact_area">
+        <div id="contact_now">
+            <button id="contact_now_button">
+                <i id="dynamic-icons" class="fa-brands fa-facebook"></i>
+            </button>
+            <div id="green_point">
+            </div>
+        </div>
+    </div>
+
+    <div id="contact_popup">
+        <div class="contact_popup__header">
+            mDesign - Giải đáp mọi thắc mắc
+        </div>
+        <div>
+            <div>
+                <button id="email_button" class="contact_method">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:abc@">
+                        <p>Email us</p>
+                        <p>contact@mdesign.vn</p>
+                    </a>
+                </button>
+                <div class="contact_method">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+84909376938">
+                        Telegram
+                    </a>
+                </div>
+                <div class="contact_method">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+84909376938">
+                        WhatsApp
+                    </a>
+                </div>
+                <div class="contact_method">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+84909376938">
+                        Zalo
+                    </a>
+                </div>
+                <div class="contact_method">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+84909376938">
+                        Call: 0123456789
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="email_modal">
+        <div id="email_modal_content">
+            <h2>Send us an email</h2>
+            <form id="contact-form" action="/action_page.php">
+                <div class="field">
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                </div>
+                <div class="field">
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                </div>
+                <div class="field">
+                    <label for="subject">Subject</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.."
+                        style="height:200px"></textarea>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Send">
+                </div>
+            </form>
+        </div>
+
+        <button id="email_modal_close">
+            <i class="fa-solid fa-times"></i>
+        </button>
+    </div>
+
+    <script>
+        // add a function that change the class of the sub-section_button when clicked : active or unactivated , unactivated - arrow right, active - rotate arrow down in 0.5s
+        const sub_section_button = document.querySelectorAll('.sub-section_button');
+        sub_section_button.forEach(button => {
+            button.addEventListener('click', () => {
+                button.children[0].classList.toggle('active');
+                button.children[0].classList.toggle('rotate');
+                button.parentElement.nextElementSibling.classList.toggle('active');
+            });
+        });
+        const side_menu_button = document.querySelector('#side_menu_button');
+        const side_menu = document.querySelector('#side_menu');
+        side_menu_button.addEventListener('click', () => {
+            const black_overlay = document.querySelector('#black_overlay');
+            black_overlay.classList.toggle('active');
+            side_menu.classList.toggle('active');
+        });
+
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            let title = document.querySelector('.title');
+            let header_contact = document.querySelector('.header_contact');
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > title.getBoundingClientRect().bottom + 100) {
+                console.log('over the title');
+                if (scrollTop > lastScrollTop) {
+                    header_contact.classList.remove('active');
+                } else {
+                    header_contact.classList.add('active');
+                }
+                lastScrollTop = scrollTop;
+            }
+        });
+
+        const icons = [
+            'fa-facebook',
+            'fa-skype',
+            'fa-instagram',
+        ];
+
+        let currentIndex = 0;
+        function changeIcon() {
+            const icon = document.querySelector('#dynamic-icons');
+            icon.style.opacity = 0;
+
+            setTimeout(() => {
+                icon.classList.remove(icons[currentIndex]);
+                currentIndex = (currentIndex + 1) % icons.length;
+                icon.classList.add(icons[currentIndex]);
+                icon.style.opacity = 1;
+            }, 500);
+        }
+        setInterval(changeIcon, 1000);
+
+        const contact_now_button = document.querySelector('#contact_now_button');
+        const contact_popup = document.querySelector('#contact_popup');
+        const black_overlay = document.querySelector('#black_overlay');
+        contact_now_button.addEventListener('click', () => {
+            contact_popup.classList.toggle('active_block');
+            black_overlay.classList.toggle('active');
+        });
+
+        // script for "#email_button" to show the email modal
+        const email_button = document.querySelector('#email_button');
+        const email_modal = document.querySelector('#email_modal');
+        const email_modal_close = document.querySelector('#email_modal_close');
+        email_button.addEventListener('click', () => {
+            email_modal.classList.toggle('active_block');
+        });
+
+        email_modal_close.addEventListener('click', () => {
+            email_modal.classList.toggle('active_block');
+        });
+
+        // catch the form submit event
+        const contact_form = document.querySelector('#contact-form');
+        contact_form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            contact_form.reset();
+            console.log('Your message has been sent');
+            // show data in the form
+            const formData = new FormData(contact_form);
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+            // reload the page
+            location.reload();
+        });
+
+        // set the height of the change_logo_box to the height of the img1
+        const img1 = document.getElementById('scroll_up_logo');
+        const change_logo_box = document.querySelector('#change_logo_box');
+        const img1_size = img1.getBoundingClientRect();
+        change_logo_box.style.height = img1_size.height + 'px';
+
+        let current_logo = 1;
+
+        window.addEventListener('wheel', function (event) {
+            const img1 = document.getElementById('scroll_up_logo');
+            const img2 = document.getElementById('scroll_down_logo');
+            if (event.deltaY > 0 && current_logo === 1) {
+                const change_logo_box = document.querySelector('#change_logo_box');
+                img1.style.transform = 'translateY(-100%)'; img2.style.transform = 'translateY(0)'; current_logo = 2;
+                // get the size of img2
+                const img2_size = img2.getBoundingClientRect();
+                //change the size of the change_logo_box to the size of img2
+                change_logo_box.style.height = img2_size.height + 'px';
+                const site_title = document.querySelector('.site_title');
+                site_title.style.transform = 'translateY(-200%)';
+            }
+            else if (event.deltaY < 0 && current_logo === 2) {
+                img1.style.transform = 'translateY(0)';
+                img2.style.transform = 'translateY(300%)';
+                current_logo = 1;
+                // get the size of img1
+                const img1_size = img1.getBoundingClientRect();
+                //change the size of the change_logo_box to the size of img1
+                const change_logo_box = document.querySelector('#change_logo_box');
+                change_logo_box.style.height = img1_size.height + 'px';
+                const site_title = document.querySelector('.site_title');
+                site_title.style.transform = 'translateY(0)';
+            }
+        })
+
+
+        // code to handle hover over button_thiet_ke, button_thi_cong, button_noi_that, ...
+        const button_thiet_ke = document.querySelector('#button_thiet_ke');
+        const button_thi_cong = document.querySelector('#button_thi_cong');
+        const button_tap_chi = document.querySelector('#button_tap_chi');
+        const button_bao_gia = document.querySelector('#button_bao_gia');
+        const button_gioi_thieu = document.querySelector('#button_gioi_thieu');
+
+        const sub_menu_thiet_ke = document.querySelector('#sub_menu_for_thiet_ke');
+        const sub_menu_thi_cong = document.querySelector('#sub_menu_for_thi_cong');
+        const sub_menu_tap_chi = document.querySelector('#sub_menu_for_tap_chi');
+        const sub_menu_bao_gia = document.querySelector('#sub_menu_for_bao_gia');
+        const sub_menu_gioi_thieu = document.querySelector('#sub_menu_for_gioi_thieu');
+
+        button_thiet_ke.addEventListener('mouseover', () => {
+            sub_menu_thiet_ke.style.display = 'flex';
+        });
+        button_thiet_ke.addEventListener('mouseout', () => {
+            sub_menu_thiet_ke.style.display = 'none';
+        });
+
+        button_thi_cong.addEventListener('mouseover', () => {
+            sub_menu_thi_cong.style.display = 'flex';
+        });
+        button_thi_cong.addEventListener('mouseout', () => {
+            sub_menu_thi_cong.style.display = 'none';
+        });
+
+        button_tap_chi.addEventListener('mouseover', () => {
+            sub_menu_tap_chi.style.display = 'flex';
+        });
+        button_tap_chi.addEventListener('mouseout', () => {
+            sub_menu_tap_chi.style.display = 'none';
+        });
+
+        button_bao_gia.addEventListener('mouseover', () => {
+            sub_menu_bao_gia.style.display = 'flex';
+        });
+        button_bao_gia.addEventListener('mouseout', () => {
+            sub_menu_bao_gia.style.display = 'none';
+        });
+
+        button_gioi_thieu.addEventListener('mouseover', () => {
+            sub_menu_gioi_thieu.style.display = 'flex';
+        });
+        button_gioi_thieu.addEventListener('mouseout', () => {
+            sub_menu_gioi_thieu.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
