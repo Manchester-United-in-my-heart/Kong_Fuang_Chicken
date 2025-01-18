@@ -1,3 +1,4 @@
+
 const sub_section_button = document.querySelectorAll('.sub-section_button');
 sub_section_button.forEach((button) => {
   button.addEventListener('click', () => {
@@ -125,35 +126,70 @@ const sub_menu_gioi_thieu = document.querySelector('#sub_menu_for_gioi_thieu');
 
 button_thiet_ke.addEventListener('mouseover', () => {
   sub_menu_thiet_ke.style.display = 'flex';
+  sub_menu_thi_cong.style.display = 'none';
+  sub_menu_tap_chi.style.display = 'none';
+  sub_menu_bao_gia.style.display = 'none';
+  sub_menu_gioi_thieu.style.display = 'none';
 });
-button_thiet_ke.addEventListener('mouseout', () => {
+sub_menu_thiet_ke.addEventListener('mouseover', () => {
+  sub_menu_thiet_ke.style.display = 'flex';
+});
+sub_menu_thiet_ke.addEventListener('mouseout', () => {
   sub_menu_thiet_ke.style.display = 'none';
 });
 
 button_thi_cong.addEventListener('mouseover', () => {
   sub_menu_thi_cong.style.display = 'flex';
+  sub_menu_thiet_ke.style.display = 'none';
+  sub_menu_tap_chi.style.display = 'none';
+  sub_menu_bao_gia.style.display = 'none';
+  sub_menu_gioi_thieu.style.display = 'none';
 });
-button_thi_cong.addEventListener('mouseout', () => {
+sub_menu_thi_cong.addEventListener('mouseover', () => {
+  sub_menu_thi_cong.style.display = 'flex';
+});
+sub_menu_thi_cong.addEventListener('mouseout', () => {
   sub_menu_thi_cong.style.display = 'none';
 });
 
 button_tap_chi.addEventListener('mouseover', () => {
   sub_menu_tap_chi.style.display = 'flex';
+  sub_menu_thiet_ke.style.display = 'none';
+  sub_menu_thi_cong.style.display = 'none';
+  sub_menu_bao_gia.style.display = 'none';
+  sub_menu_gioi_thieu.style.display = 'none';
 });
-button_tap_chi.addEventListener('mouseout', () => {
+sub_menu_tap_chi.addEventListener('mouseover', () => {
+  sub_menu_tap_chi.style.display = 'flex';
+});
+sub_menu_tap_chi.addEventListener('mouseout', () => {
   sub_menu_tap_chi.style.display = 'none';
 });
 
 button_bao_gia.addEventListener('mouseover', () => {
   sub_menu_bao_gia.style.display = 'flex';
+  sub_menu_thiet_ke.style.display = 'none';
+  sub_menu_thi_cong.style.display = 'none';
+  sub_menu_tap_chi.style.display = 'none';
+  sub_menu_gioi_thieu.style.display = 'none';
 });
-button_bao_gia.addEventListener('mouseout', () => {
+sub_menu_bao_gia.addEventListener('mouseover', () => {
+  sub_menu_bao_gia.style.display = 'flex';
+});
+sub_menu_bao_gia.addEventListener('mouseout', () => {
   sub_menu_bao_gia.style.display = 'none';
 });
 
 button_gioi_thieu.addEventListener('mouseover', () => {
   sub_menu_gioi_thieu.style.display = 'flex';
+  sub_menu_thiet_ke.style.display = 'none';
+  sub_menu_thi_cong.style.display = 'none';
+  sub_menu_tap_chi.style.display = 'none';
+  sub_menu_bao_gia.style.display = 'none';
 });
-button_gioi_thieu.addEventListener('mouseout', () => {
+sub_menu_gioi_thieu.addEventListener('mouseover', () => {
+  sub_menu_gioi_thieu.style.display = 'flex';
+});
+sub_menu_gioi_thieu.addEventListener('mouseout', () => {
   sub_menu_gioi_thieu.style.display = 'none';
 });
